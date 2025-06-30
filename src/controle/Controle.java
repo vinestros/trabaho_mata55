@@ -12,6 +12,7 @@ public class Controle {
         Corredor corredor1 = new Corredor();
         Estalador estalador1 = new Estalador();
         Baiacu baiacu1 = new Baiacu();
+        // test
 
         System.out.println();
         System.out.print("Digite seu nome: ");
