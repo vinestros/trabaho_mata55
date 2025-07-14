@@ -1,6 +1,7 @@
 package player;
 
 import enemy.Infectado;
+import weapon.Arma;
 import java.util.Random;
 
 /**
@@ -13,6 +14,7 @@ public class Sobrevivente {
     private int agilidade;
     private int forca;
     private int furtividade;
+    private Arma armaEquipada;
     private Random random = new Random();
 
     /**
@@ -38,6 +40,31 @@ public class Sobrevivente {
     }
 
     /**
+     * Equipa uma arma no sobrevivente
+     * @param arma A arma a ser equipada
+     */
+    public void equiparArma(Arma arma) {
+        this.armaEquipada = arma;
+        System.out.println("Você equipou: " + arma.getNome() + " (Dano: " + arma.getDano() + ")");
+    }
+
+    /**
+     * Verifica se o sobrevivente possui uma arma equipada
+     * @return true se possui arma equipada, false caso contrário
+     */
+    public boolean temArmaEquipada() {
+        return armaEquipada != null;
+    }
+
+    /**
+     * Retorna a arma equipada
+     * @return A arma equipada ou null se não houver
+     */
+    public Arma getArmaEquipada() {
+        return armaEquipada;
+    }
+
+    /**
      * Tenta atacar um infectado baseado na força do sobrevivente
      * @param infectado O infectado a ser atacado
      */
@@ -45,18 +72,35 @@ public class Sobrevivente {
         System.out.println("\n" + infectado.getDescricaoAparencia());
         System.out.println("Você ouve: " + infectado.emitirSom());
         
-        if (forca == 0) {
-            System.out.println("\nO " + infectado.getTipo() + " foi mais forte do que você e te pegou!");
-            pontosDeVida = 0;
-        } else {
-            double chanceFracasso = (0.6 + (infectado.getForca() / 10.0)) - (forca / 10.0);
+        // Se tem arma equipada, sempre consegue atacar com vantagem
+        if (temArmaEquipada()) {
+            System.out.println("\n" + armaEquipada.usar());
+            
+            // Com arma, a chance de fracasso é reduzida significativamente
+            double chanceFracasso = Math.max(0.1, (0.3 + (infectado.getForca() / 15.0)) - (forca / 15.0));
             double varResultado = random.nextDouble();
             
             if (varResultado < chanceFracasso) {
-                System.out.println("O " + infectado.getTipo() + " foi mais forte do que você e te pegou!");
+                System.out.println("O " + infectado.getTipo() + " conseguiu te atacar mesmo com sua arma!");
                 pontosDeVida = 0;
             } else {
-                System.out.println("Muito bom! Você conseguiu derrotar o " + infectado.getTipo() + "!");
+                System.out.println("Excelente! Você derrotou o " + infectado.getTipo() + " com sua " + armaEquipada.getNome() + "!");
+            }
+        } else {
+            // Lógica original para ataque sem arma
+            if (forca == 0) {
+                System.out.println("\nO " + infectado.getTipo() + " foi mais forte do que você e te pegou!");
+                pontosDeVida = 0;
+            } else {
+                double chanceFracasso = (0.6 + (infectado.getForca() / 10.0)) - (forca / 10.0);
+                double varResultado = random.nextDouble();
+                
+                if (varResultado < chanceFracasso) {
+                    System.out.println("O " + infectado.getTipo() + " foi mais forte do que você e te pegou!");
+                    pontosDeVida = 0;
+                } else {
+                    System.out.println("Muito bom! Você conseguiu derrotar o " + infectado.getTipo() + "!");
+                }
             }
         }
     }

@@ -4,11 +4,15 @@ import player.Sobrevivente;
 import enemy.Corredor;
 import enemy.Estalador;
 import enemy.Baiacu;
+import weapon.Faca;
+import weapon.Pistola;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
         Corredor corredor1 = new Corredor();
         Estalador estalador1 = new Estalador();
         Baiacu baiacu1 = new Baiacu();
@@ -37,6 +41,38 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
+        }
+        System.out.println();
+        System.out.println("Deseja vasculhar o ambiente? ");
+        System.out.println("Digite 1 para SIM ou 2 para NÃO.");
+        int vasculharAmbiente = scanner.nextInt();
+        if (vasculharAmbiente == 1) {
+            System.out.println("\nVocê começou a vasculhar o ambiente...");
+            System.out.println("Procurando por itens úteis entre os destroços...");
+            
+            // 50% de chance de encontrar algo
+            boolean encontrouAlgo = random.nextBoolean();
+            
+            if (encontrouAlgo) {
+                // Se encontrou algo, 70% chance de ser faca, 30% chance de ser pistola
+                double probabilidadeArma = random.nextDouble();
+                
+                if (probabilidadeArma <= 0.7) {
+                    // Encontrou uma faca (70% de chance)
+                    Faca facaEncontrada = new Faca();
+                    System.out.println("Sorte! Você encontrou uma " + facaEncontrada.getNome() + "!");
+                    sobrevivente.equiparArma(facaEncontrada);
+                } else {
+                    // Encontrou uma pistola (30% de chance)
+                    Pistola pistolaEncontrada = new Pistola();
+                    System.out.println("Uau! Você encontrou uma " + pistolaEncontrada.getNome() + "!");
+                    sobrevivente.equiparArma(pistolaEncontrada);
+                }
+            } else {
+                // Não encontrou nada (50% de chance)
+                System.out.println("Você vasculhou cuidadosamente, mas não encontrou nada útil...");
+                System.out.println("Terá que se virar apenas com suas habilidades!");
+            }
         }
 
         String msgAcao2 = "Digite 1 para ATACAR, 2 para CORRER ou 3 para PASSAR FURTIVAMENTE.";
