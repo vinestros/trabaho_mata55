@@ -1,9 +1,9 @@
 package weapon;
 
 public class Pistola extends Arma {
-    
+
     public Pistola() {
-        super("Pistola", 25);
+        super("Pistola", 6);
     }
 
     @Override
