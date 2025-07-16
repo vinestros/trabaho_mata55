@@ -43,6 +43,38 @@ public class Sobrevivente {
     }
 
     /**
+     * Retorna o nome do sobrevivente
+     * @return nome do sobrevivente
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Retorna o valor do atributo agilidade
+     * @return pontos de agilidade
+     */
+    public int getAgilidade() {
+        return agilidade;
+    }
+
+    /**
+     * Retorna o valor do atributo força
+     * @return pontos de força
+     */
+    public int getForca() {
+        return forca;
+    }
+
+    /**
+     * Retorna o valor do atributo furtividade
+     * @return pontos de furtividade
+     */
+    public int getFurtividade() {
+        return furtividade;
+    }
+
+    /**
      * Equipa uma arma no sobrevivente
      * 
      * @param arma A arma a ser equipada
