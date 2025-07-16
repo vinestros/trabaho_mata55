@@ -16,9 +16,10 @@ Um jogo de sobrevivência baseado em texto onde você assume o papel de um sobre
 ### Explorando o Ambiente
 - Você pode escolher **vasculhar o ambiente** antes de iniciar
 - **50% de chance** de encontrar uma arma:
-  - **70% de chance**: Faca (Dano: 15)
-  - **30% de chance**: Pistola (Dano: 25)
+  - **70% de chance**: Faca (+3 de força)
+  - **30% de chance**: Pistola (+6 de força)
 - **50% de chance** de não encontrar nada
+- Se furtividade < 3: Falha automática
 
 ### Enfrentando os Infectados
 Você encontrará **3 tipos de infectados** em sequência:
